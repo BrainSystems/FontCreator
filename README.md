@@ -26,6 +26,7 @@ FontCreatorTest: A small windows test utility in C that loads the generated font
 Credits:
 
 GLCD_FontCreator - Copyright 2015 Martin Burri
+
 Font Dialog derived from CustomFontDialog by Syed Umar Anis (http://umaranis.wordpress.com/)
 
 Note: Fonts are copyrighted materials. Before using any derived bitmap make sure you are compliant with the license. There are a number of great free to use fonts out there. But don't distribute/sell derived fonts if the license is not explicitly allowing you this.
