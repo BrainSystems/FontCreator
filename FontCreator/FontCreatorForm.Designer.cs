@@ -68,6 +68,11 @@
             textBoxCharSpacing = new TextBox();
             label11 = new Label();
             buttonAbout = new Button();
+            textBoxAlphaThld = new TextBox();
+            label12 = new Label();
+            label13 = new Label();
+            comboBoxTextRenderingHint = new ComboBox();
+            label14 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBoxCharacter).BeginInit();
             groupBox3.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -78,7 +83,7 @@
             // 
             // buttonLoadFont
             // 
-            buttonLoadFont.Location = new Point(26, 733);
+            buttonLoadFont.Location = new Point(26, 784);
             buttonLoadFont.Name = "buttonLoadFont";
             buttonLoadFont.Size = new Size(542, 49);
             buttonLoadFont.TabIndex = 0;
@@ -90,7 +95,7 @@
             // 
             pictureBoxCharacter.Location = new Point(594, 16);
             pictureBoxCharacter.Name = "pictureBoxCharacter";
-            pictureBoxCharacter.Size = new Size(688, 701);
+            pictureBoxCharacter.Size = new Size(688, 753);
             pictureBoxCharacter.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBoxCharacter.TabIndex = 2;
             pictureBoxCharacter.TabStop = false;
@@ -102,7 +107,7 @@
             listViewCharacters.Location = new Point(1288, 16);
             listViewCharacters.MultiSelect = false;
             listViewCharacters.Name = "listViewCharacters";
-            listViewCharacters.Size = new Size(390, 701);
+            listViewCharacters.Size = new Size(390, 753);
             listViewCharacters.TabIndex = 3;
             listViewCharacters.UseCompatibleStateImageBehavior = false;
             listViewCharacters.SelectedIndexChanged += listViewCharacters_SelectedIndexChanged;
@@ -110,7 +115,7 @@
             // buttonExportFont
             // 
             buttonExportFont.Enabled = false;
-            buttonExportFont.Location = new Point(1338, 1124);
+            buttonExportFont.Location = new Point(1338, 1175);
             buttonExportFont.Name = "buttonExportFont";
             buttonExportFont.Size = new Size(226, 71);
             buttonExportFont.TabIndex = 4;
@@ -172,7 +177,7 @@
             // 
             // textBoxFontName
             // 
-            textBoxFontName.Location = new Point(580, 1147);
+            textBoxFontName.Location = new Point(580, 1198);
             textBoxFontName.Name = "textBoxFontName";
             textBoxFontName.Size = new Size(460, 27);
             textBoxFontName.TabIndex = 11;
@@ -180,7 +185,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(580, 1124);
+            label3.Location = new Point(580, 1175);
             label3.Name = "label3";
             label3.Size = new Size(306, 20);
             label3.TabIndex = 12;
@@ -204,7 +209,7 @@
             // 
             // buttonSetExportDirectory
             // 
-            buttonSetExportDirectory.Location = new Point(26, 1124);
+            buttonSetExportDirectory.Location = new Point(26, 1175);
             buttonSetExportDirectory.Name = "buttonSetExportDirectory";
             buttonSetExportDirectory.Size = new Size(536, 38);
             buttonSetExportDirectory.TabIndex = 15;
@@ -214,7 +219,7 @@
             // 
             // textBoxExportDir
             // 
-            textBoxExportDir.Location = new Point(26, 1168);
+            textBoxExportDir.Location = new Point(26, 1219);
             textBoxExportDir.Name = "textBoxExportDir";
             textBoxExportDir.ReadOnly = true;
             textBoxExportDir.Size = new Size(536, 27);
@@ -222,7 +227,7 @@
             // 
             // textBoxInfo
             // 
-            textBoxInfo.Location = new Point(641, 755);
+            textBoxInfo.Location = new Point(641, 806);
             textBoxInfo.Name = "textBoxInfo";
             textBoxInfo.ReadOnly = true;
             textBoxInfo.Size = new Size(1043, 27);
@@ -231,7 +236,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(594, 755);
+            label5.Location = new Point(594, 806);
             label5.Name = "label5";
             label5.Size = new Size(35, 20);
             label5.TabIndex = 18;
@@ -378,7 +383,7 @@
             // 
             comboBoxExportFormat.FormattingEnabled = true;
             comboBoxExportFormat.Items.AddRange(new object[] { "BrainSystems RunLength", "GLCD Font Creator 2" });
-            comboBoxExportFormat.Location = new Point(1070, 1146);
+            comboBoxExportFormat.Location = new Point(1070, 1197);
             comboBoxExportFormat.Name = "comboBoxExportFormat";
             comboBoxExportFormat.Size = new Size(243, 28);
             comboBoxExportFormat.TabIndex = 28;
@@ -386,7 +391,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(1070, 1123);
+            label8.Location = new Point(1070, 1174);
             label8.Name = "label8";
             label8.Size = new Size(101, 20);
             label8.TabIndex = 29;
@@ -394,7 +399,7 @@
             // 
             // pictureBoxString
             // 
-            pictureBoxString.Location = new Point(26, 793);
+            pictureBoxString.Location = new Point(26, 844);
             pictureBoxString.Name = "pictureBoxString";
             pictureBoxString.Size = new Size(1652, 311);
             pictureBoxString.TabIndex = 30;
@@ -421,7 +426,7 @@
             // 
             // textBoxCharSpacing
             // 
-            textBoxCharSpacing.Location = new Point(235, 690);
+            textBoxCharSpacing.Location = new Point(159, 694);
             textBoxCharSpacing.Name = "textBoxCharSpacing";
             textBoxCharSpacing.Size = new Size(67, 27);
             textBoxCharSpacing.TabIndex = 33;
@@ -429,7 +434,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(302, 697);
+            label11.Location = new Point(232, 697);
             label11.Name = "label11";
             label11.Size = new Size(47, 20);
             label11.TabIndex = 34;
@@ -437,7 +442,7 @@
             // 
             // buttonAbout
             // 
-            buttonAbout.Location = new Point(1582, 1162);
+            buttonAbout.Location = new Point(1582, 1213);
             buttonAbout.Name = "buttonAbout";
             buttonAbout.Size = new Size(96, 33);
             buttonAbout.TabIndex = 35;
@@ -445,11 +450,60 @@
             buttonAbout.UseVisualStyleBackColor = true;
             buttonAbout.Click += buttonAbout_Click;
             // 
+            // textBoxAlphaThld
+            // 
+            textBoxAlphaThld.Location = new Point(499, 741);
+            textBoxAlphaThld.Name = "textBoxAlphaThld";
+            textBoxAlphaThld.Size = new Size(50, 27);
+            textBoxAlphaThld.TabIndex = 36;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(412, 744);
+            label12.Name = "label12";
+            label12.Size = new Size(81, 20);
+            label12.TabIndex = 37;
+            label12.Text = "Alpha Thld";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(544, 744);
+            label13.Name = "label13";
+            label13.Size = new Size(21, 20);
+            label13.TabIndex = 38;
+            label13.Text = "%";
+            // 
+            // comboBoxTextRenderingHint
+            // 
+            comboBoxTextRenderingHint.FormattingEnabled = true;
+            comboBoxTextRenderingHint.Items.AddRange(new object[] { "Single Bit Per Pixel Grid Fit", "Single Bit Per Pixel", "Anti Alias Grid Fit", "Anti Alias", "Clear Type Grid Fit" });
+            comboBoxTextRenderingHint.Location = new Point(166, 741);
+            comboBoxTextRenderingHint.Name = "comboBoxTextRenderingHint";
+            comboBoxTextRenderingHint.Size = new Size(209, 28);
+            comboBoxTextRenderingHint.TabIndex = 39;
+            comboBoxTextRenderingHint.SelectedIndexChanged += comboBoxTextRenderingHint_SelectedIndexChanged;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(26, 744);
+            label14.Name = "label14";
+            label14.Size = new Size(133, 20);
+            label14.TabIndex = 40;
+            label14.Text = "Text rendering hint";
+            // 
             // FontCreatorForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1696, 1215);
+            ClientSize = new Size(1696, 1266);
+            Controls.Add(label14);
+            Controls.Add(comboBoxTextRenderingHint);
+            Controls.Add(label13);
+            Controls.Add(label12);
+            Controls.Add(textBoxAlphaThld);
             Controls.Add(buttonAbout);
             Controls.Add(label11);
             Controls.Add(textBoxCharSpacing);
@@ -542,5 +596,10 @@
         private TextBox textBoxCharSpacing;
         private Label label11;
         private Button buttonAbout;
+        private TextBox textBoxAlphaThld;
+        private Label label12;
+        private Label label13;
+        private ComboBox comboBoxTextRenderingHint;
+        private Label label14;
     }
 }

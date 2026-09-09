@@ -13,6 +13,7 @@ using System.Reflection;
 using Microsoft.VisualBasic;
 using static System.Windows.Forms.DataFormats;
 using System.Drawing;
+using System.Drawing.Text;
 
 namespace FontCreator
 {
@@ -50,7 +51,7 @@ namespace FontCreator
             fontListFont.LoadFonts();
 
             fontListFont.SelectedFontFamilyChanged += lstFont_SelectedFontFamilyChanged;
-            fontListFont.SelectedFontFamily = FontFamily.GenericSansSerif;
+            //         fontListFont.SelectedFontFamily = FontFamily.GenericSansSerif;
             textBoxFontSize.Text = Convert.ToString(10);
 
 
@@ -69,11 +70,14 @@ namespace FontCreator
             textBoxFirstCharcter.Text = (String)Settings.Default["FirstChar"];
             textBoxLastChar.Text = (String)Settings.Default["NumChars"];
             textBoxSpaceCharAdjust.Text = (String)Settings.Default["EmptyCharWidth"];
+            textBoxAlphaThld.Text = (String)Settings.Default["AlphaThreshold"];
             textBoxCharSpacing.Text = (String)Settings.Default["DefaultCharSpacing"];
             textBoxExportDir.Text = (String)Settings.Default["ExportDir"];
             comboBoxExportFormat.SelectedIndex = (int)Settings.Default["ExportFormat"];
-
+            comboBoxTextRenderingHint.SelectedIndex = (int)Settings.Default["TextRenderingHint"];
             mSelectedFont = (Font)Settings.Default["SelectedFont"];
+
+            checkAlphaEnabled();
 
             if (mSelectedFont == null)
             {
@@ -116,9 +120,11 @@ namespace FontCreator
             Settings.Default["FirstChar"] = textBoxFirstCharcter.Text;
             Settings.Default["NumChars"] = textBoxLastChar.Text;
             Settings.Default["EmptyCharWidth"] = textBoxSpaceCharAdjust.Text;
+            Settings.Default["AlphaThreshold"] = textBoxAlphaThld.Text;
             Settings.Default["DefaultCharSpacing"] = textBoxCharSpacing.Text;
             Settings.Default["ExportDir"] = textBoxExportDir.Text;
             Settings.Default["ExportFormat"] = comboBoxExportFormat.SelectedIndex;
+            Settings.Default["TextRenderingHint"] = comboBoxTextRenderingHint.SelectedIndex;
 
             if (comboBoxCodePage.SelectedItem != null)
             {
@@ -148,6 +154,18 @@ namespace FontCreator
         private void chb_CheckedChanged(object sender, EventArgs e)
         {
             UpdateSampleText();
+        }
+
+        private void checkAlphaEnabled()
+        {
+            if (comboBoxTextRenderingHint.SelectedIndex < 2)
+            {
+                textBoxAlphaThld.Enabled = false;
+            }
+            else
+            {
+                textBoxAlphaThld.Enabled = true;
+            }
         }
 
 
@@ -241,6 +259,33 @@ namespace FontCreator
                 int charSpacing = int.Parse(textBoxCharSpacing.Text);
 
                 int numChars = lastChar - firstChar + 1;
+                int alphaThresholdInt = int.Parse(textBoxAlphaThld.Text);
+
+                TextRenderingHint renderingHint;
+                switch (comboBoxTextRenderingHint.SelectedIndex)
+                {
+                    case 0:
+                        renderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+                        alphaThresholdInt = 50;
+                        break;
+                    case 1:
+                        renderingHint = TextRenderingHint.SingleBitPerPixel;
+                        alphaThresholdInt = 50;
+                        break;
+                    case 2:
+                        renderingHint = TextRenderingHint.AntiAliasGridFit;
+                        break;
+                    case 3:
+                        renderingHint = TextRenderingHint.AntiAlias;
+                        break;
+                    case 4:
+                        renderingHint = TextRenderingHint.ClearTypeGridFit;
+                        break;
+                    default:
+                        renderingHint = TextRenderingHint.SystemDefault;
+                        break;
+                }
+
 
                 if ((spaceBarAdjust < 0) || (spaceBarAdjust > 500))
                 {
@@ -253,6 +298,10 @@ namespace FontCreator
                 else if ((firstChar < 0) || (numChars < 1) || (firstChar + numChars > 256))
                 {
                     MessageBox.Show("Char span must be between 0 and 255, Last char needs to be greater than First Char", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if ((alphaThresholdInt < 0) || (alphaThresholdInt > 100))
+                {
+                    MessageBox.Show("Alpha threshold needs to be between 0 and 100", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else if (comboBoxCodePage.SelectedItem == null)
                 {
@@ -269,7 +318,7 @@ namespace FontCreator
 
                     EncodingItem encodingItem = (EncodingItem)comboBoxCodePage.SelectedItem;
 
-                    mCharCollection = new CharCollection(mSelectedFont, firstChar, numChars, spaceBarAdjust, charSpacing, excludedChars, encodingItem.Encoding);
+                    mCharCollection = new CharCollection(mSelectedFont, firstChar, numChars, spaceBarAdjust, charSpacing, excludedChars, encodingItem.Encoding, (float)(alphaThresholdInt / 100.0), renderingHint);
 
                     listViewCharacters.Items.Clear();
 
@@ -607,6 +656,12 @@ namespace FontCreator
         private void buttonAbout_Click(object sender, EventArgs e)
         {
             MessageBox.Show("BrainSystems FontCreator\n\rReleased under GLP3.0\n\rFind documentation and source under https://github.com/BrainSystems/FontCreator/", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void comboBoxTextRenderingHint_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            checkAlphaEnabled();
+
         }
     }
 }

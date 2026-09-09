@@ -23,7 +23,7 @@ namespace FontCreator
             mBits = new BitArray(mWidth * mHeight);
         }
 
-        public BitImage(Bitmap bitmap)
+        public BitImage(Bitmap bitmap, float alphaThreshold)
         {
             mWidth = bitmap.Width;
             mHeight = bitmap.Height;
@@ -35,7 +35,7 @@ namespace FontCreator
                 for (int y = 0; y < mHeight; y++)
                 {
                     Color pix = bitmap.GetPixel(x, y);
-                    SetPixel(x, y, pix.GetBrightness() < 0.5);
+                    SetPixel(x, y, pix.GetBrightness() <= alphaThreshold);
                 }
             }
         }

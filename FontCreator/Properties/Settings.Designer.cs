@@ -129,5 +129,29 @@ namespace FontCreator.Properties {
                 this["DefaultCharSpacing"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public string AlphaThreshold {
+            get {
+                return ((string)(this["AlphaThreshold"]));
+            }
+            set {
+                this["AlphaThreshold"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int TextRenderingHint {
+            get {
+                return ((int)(this["TextRenderingHint"]));
+            }
+            set {
+                this["TextRenderingHint"] = value;
+            }
+        }
     }
 }

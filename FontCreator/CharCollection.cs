@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -21,7 +22,7 @@ namespace FontCreator
         int mCommonHeight;
 
         int mCharSpacing;
-        public CharCollection(Font font, int firstChar, int charCount, int spaceCharAdjustValue, int charSpacing, List<ExcludedChar> excludedChars, int encloding)
+        public CharCollection(Font font, int firstChar, int charCount, int spaceCharAdjustValue, int charSpacing, List<ExcludedChar> excludedChars, int encloding, float alphaThreshold, TextRenderingHint renderingHint)
         {
             int i = 0;
 
@@ -74,7 +75,7 @@ namespace FontCreator
                         widthAdjustValue = 100;
                     }
 
-                    mCharacters[i] = new Character(font, character, i + mFirstChar, widthAdjustValue, excludeChar, substituteCharIndex);
+                    mCharacters[i] = new Character(font, character, i + mFirstChar, widthAdjustValue, excludeChar, substituteCharIndex, alphaThreshold, renderingHint);
                 }
             }
             catch 

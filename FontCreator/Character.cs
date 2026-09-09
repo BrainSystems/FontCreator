@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace FontCreator
         int mCommonEmptyTopRows = 0;
         int mCommmonHeight = 0;
         int mSubstituteCharIndex = -1;
-        private Bitmap GetStringBitmap(Font font, String s)
+        private Bitmap GetStringBitmap(Font font, String s, TextRenderingHint renderingHint)
         {
             // get the size needed to paint the string in one line with the font given
             Bitmap fontImage = new Bitmap(1000, 1000);// biggg to have all printed on one line which is needed for long strings and large fonts
@@ -43,7 +44,7 @@ namespace FontCreator
             g.Clear(Color.White);
             // set text drawing props to make the best capturing later
             g.TextContrast = 0;
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit;
+            g.TextRenderingHint = renderingHint;
             g.DrawString(s, font, Brushes.Black, new Point(0, 0)); // draw red on black for capturing
             g.Flush(System.Drawing.Drawing2D.FlushIntention.Sync); // get things finished
             g.Dispose();
@@ -52,14 +53,14 @@ namespace FontCreator
             return fontImage;
         }
 
-        public Character(Font font, String ch, int asciiIndex, int widthAdjustValue, bool exclude, int substituteCharIndex)
+        public Character(Font font, String ch, int asciiIndex, int widthAdjustValue, bool exclude, int substituteCharIndex, float alphaThreshold, TextRenderingHint renderingHint)
         {
             mChar = ch;
             mAsciiIndex =asciiIndex;
             excluded = exclude;
             if (!exclude)
             {
-                Bitmap bmp = GetStringBitmap(font, ch);
+                Bitmap bmp = GetStringBitmap(font, ch ,renderingHint);
 
                 if (widthAdjustValue!=100)
                 {
@@ -74,7 +75,7 @@ namespace FontCreator
                     bmp = new Bitmap(bmp, new Size(width, bmp.Height));
                 }
  
-                characterImage = new BitImage(bmp);
+                characterImage = new BitImage(bmp, alphaThreshold);
 
                 bool pixelFound = false;
 
